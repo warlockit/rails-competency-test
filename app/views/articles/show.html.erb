@@ -4,7 +4,7 @@
 
 <br /><br />
 <p>
-  <strong>Category:</strong> <%= @article.category_id %><br />
-  <strong>User:</strong> <%= @article.user_id %>
+  <strong>Category:</strong> <%= @article.category.title %><br />
+  <strong>User:</strong> <%= @article.user.email %>
 </p>
-<%= link_to 'Edit', edit_article_path(@article) %>
+<%= link_to 'Edit', edit_article_path(@article), class: "btn btn-info" if logged_in?(:editor, :admin) && current_user.id == @article.user_id %>
