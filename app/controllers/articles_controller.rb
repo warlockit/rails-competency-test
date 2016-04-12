@@ -2,7 +2,8 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :set_user
   before_action :check_owner, only: [:edit, :update, :destroy]
-  access all: [:index], user: [:index, :show], editor: :all, admin: :all
+  before_action :check_admin, only: [:new, :create, :edit, :update, :destroy]
+  access all: [:index], user: [:index, :show], editor: :all, admin: {except: [:new, :edit, :update, :destroy]}
 
   # GET /articles
   def index
@@ -65,6 +66,12 @@ class ArticlesController < ApplicationController
         if @article.user_id != current_user.id
           redirect_to article_url(@article), notice: 'Access deny.'
         end
+      end
+    end
+
+    def check_admin
+      if user_signed_in? && logged_in?(:admin)
+        redirect_to articles_url, notice: 'Access deny.'
       end
     end
 

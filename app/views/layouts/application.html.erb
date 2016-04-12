@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Simplenews</title>
+  <title>Simple News App</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -18,6 +18,9 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li><%= link_to "Articles", articles_path %></li>
+          <% if logged_in?(:admin) %>
+          <li><%= link_to "Users", "#" %></li>
+          <% end %>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -27,6 +30,7 @@
           <% end %>
 
           <% if user_signed_in? %>
+          <li><%= link_to current_user.email, edit_user_registration_path %></li>
           <li><%= link_to "Logout", destroy_user_session_path, method: "delete" %></li>
           <% end %>
         </ul>
