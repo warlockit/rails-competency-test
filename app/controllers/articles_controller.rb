@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :set_user
+  before_action :check_owner, only: [:edit, :update, :destroy]
   access all: [:index], user: [:index, :show], editor: :all, admin: :all
 
   # GET /articles
@@ -57,6 +58,14 @@ class ArticlesController < ApplicationController
 
     def set_user
       @user = current_user if user_signed_in?
+    end
+
+    def check_owner
+      if user_signed_in?
+        if @article.user_id != current_user.id
+          redirect_to article_url(@article), notice: 'Access deny.'
+        end
+      end
     end
 
     # Only allow a trusted parameter "white list" through.
