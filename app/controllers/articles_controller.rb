@@ -64,14 +64,14 @@ class ArticlesController < ApplicationController
     def check_owner
       if user_signed_in?
         if @article.user_id != current_user.id
-          redirect_to article_url(@article), notice: 'Access deny.'
+          redirect_to article_url(@article), notice: 'Permission Denied'
         end
       end
     end
 
     def check_admin
       if user_signed_in? && logged_in?(:admin)
-        redirect_to articles_url, notice: 'Access deny.'
+        redirect_to articles_url, notice: 'Permission Denied'
       end
     end
 
