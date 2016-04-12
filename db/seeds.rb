@@ -6,10 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-if User.find_by_email("warlockit@yandex.ru").nil?
-  user = User.create!({:email => "warlockit@yandex.ru", :password => "testpass", :password_confirmation => "testpass"})
-  user.roles = :admin
-  user.save
+if User.find_by_email("admin@mail.com").nil?
+  User.create!({:email => "admin@mail.com", :password => "testpass", :password_confirmation => "testpass", :roles => :admin})
+  User.create!({:email => "editor@mail.com", :password => "testpass", :password_confirmation => "testpass", :roles => :editor})
+  User.create!({:email => "user@mail.com", :password => "testpass", :password_confirmation => "testpass"})
 end
 
 unless Category.all.any?
