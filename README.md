@@ -55,3 +55,6 @@ Devise can be used for authentication.
 
 ## Templating
 slim *(Prefered)*, haml, erb
+
+## Heroku
+[Simple News App](https://tranquil-taiga-96036.herokuapp.com/)
