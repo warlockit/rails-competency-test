@@ -21,12 +21,9 @@
   </div>
   <div class="field">
     <%= f.label :category_id %><br>
-    <%= f.number_field :category_id %>
+    <%= f.collection_select(:category_id, Category.all, :id, :title, {:include_blank => "Choose category"}) %>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
+  <%= f.hidden_field :user_id %>
   <div class="actions">
     <%= f.submit %>
   </div>
